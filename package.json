@@ -1,0 +1,19 @@
+{
+  "name": "systat",
+  "version": "0.0.0",
+  "description": "Utility to collect system stat.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruckuus/systat.git"
+  },
+  "author": "Dwi SS <ruckuus@gmail.com> (https://github.com/ruckuus)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ruckuus/systat/issues"
+  },
+  "homepage": "https://github.com/ruckuus/systat#readme"
+}
