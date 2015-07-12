@@ -1,7 +1,7 @@
 f = require('../index.js');
 
-var data = function(string) {
-  console.log(string);
+var data = function(error, data) {
+  console.log(JSON.stringify(data));
 }
 
 f(data);
