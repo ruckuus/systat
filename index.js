@@ -4,6 +4,14 @@ function StatService() {};
 
 StatService.prototype = {
   removeEmptyElements: function(arr) {
+    if (!arr) {
+      return new Error('Empty argument');
+    }
+
+    if (!Array.isArray(arr)) {
+      return new Error('Invalid argument');
+    }
+
     return arr.filter(function(e) {
       return e.trim() != '';
     });
