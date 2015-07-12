@@ -3,13 +3,13 @@ var exec = require('child_process').exec, child, rows, line, big_arr, li, header
 function StatService() {};
 
 StatService.prototype = {
-  utilRemoveEmptyElements: function(arr) {
+  removeEmptyElements: function(arr) {
     return arr.filter(function(e) {
       return e.trim() != '';
     });
   },
 
-  utilMapHeaderData: function(keys, elements) {
+  mapHeaderData: function(keys, elements) {
     if (keys.length != elements.length) {
       console.log("Error");
     }
@@ -35,7 +35,7 @@ StatService.prototype = {
         // Get header
         header = line.shift();
         header = header.split(' ');
-        header = StatService.prototype.utilRemoveEmptyElements(header);
+        header = StatService.prototype.removeEmptyElements(header);
 
         // Remove the last element if it's empty
         if (!line[line.length]) {
@@ -46,9 +46,9 @@ StatService.prototype = {
 
         line.forEach(function(item) {
           li = item.split(' ');
-          li = StatService.prototype.utilRemoveEmptyElements(li);
+          li = StatService.prototype.removeEmptyElements(li);
 
-          big_arr.push(StatService.prototype.utilMapHeaderData(header, li));
+          big_arr.push(StatService.prototype.mapHeaderData(header, li));
 
         });
 
@@ -61,7 +61,9 @@ function newStatService() {
   return new StatService();
 }
 
-module.exports =  function(cb) {
+module.exports.exec = function(cb) {
   var srv = newStatService();
   srv.doExec('ps -ef', cb);
 }
+
+module.exports.StatService = StatService;

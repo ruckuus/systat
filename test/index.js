@@ -1,14 +1,15 @@
-var should = require('chai').should,
-    sysstat = require('../index');
+var expect = require('chai').expect,
+    util = require('util'),
+    sysstat = require('../index.js');
 
-var cb = function(err, data) {
-    console.log(JSON.stringify(data));
-}
+describe('test removeEmptyElements() ', function() {
+  it('should return clean Array', function() {
+    var expected = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    var myString = "a b    c d e f g    h ";
+    var myString = myString.split(' ');
 
-describe('test doIt() command', function() {
-  it('should return JS object on success', function() {
-    var cmd = 'ps -ef | head -n 2';
-    sysstat.doIt(cmd, cb);
+    var srv = new sysstat.StatService();
+    expect(expected).to.eql(srv.removeEmptyElements(myString));
   });
 })
 
