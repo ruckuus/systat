@@ -5,7 +5,7 @@ function StatService() {};
 StatService.prototype = {
   removeEmptyElements: function(arr) {
     if (!arr) {
-      return new Error('Empty argument');
+      return new Error('Invalid argument');
     }
 
     if (!Array.isArray(arr)) {
@@ -19,7 +19,11 @@ StatService.prototype = {
 
   mapHeaderData: function(keys, elements) {
     if (keys.length != elements.length) {
-      console.log("Error");
+      return new Error('Invalid argument');
+    }
+
+    if (!Array.isArray(keys) || !Array.isArray(elements)) {
+      return new Error('Invalid argument');
     }
 
     var myHash = {};
