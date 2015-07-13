@@ -29,7 +29,7 @@ describe('test removeEmptyElements() ', function() {
   });
 });
 
-describe('test mapHeaderData()', function() {
+describe('test mapObject()', function() {
   it('should return correctly formatted hash table', function() {
     var expected = {
       'a' : 1,
@@ -41,20 +41,20 @@ describe('test mapHeaderData()', function() {
     var vals = [1, 2, 3];
     var srv = new sysstat.StatService();
 
-    expect(expected).to.eql(srv.mapHeaderData(header, vals));
+    expect(expected).to.eql(srv.mapObject(header, vals));
   });
 
   it('should return Error when passed empty arguments', function() {
     var expected = new Error('Invalid arguments');
     var srv = new sysstat.StatService();
 
-    expect(expected).to.eql(srv.mapHeaderData([], []));
+    expect(expected).to.eql(srv.mapObject([], []));
   });
 
   it('should return Error when passed invalid arguments', function() {
     var expected = new Error('Invalid arguments');
     var srv = new sysstat.StatService();
 
-    expect(expected).to.eql(srv.mapHeaderData([], "hello world"));
+    expect(expected).to.eql(srv.mapObject([], "hello world"));
   });
 });

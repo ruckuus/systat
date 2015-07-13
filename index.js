@@ -17,7 +17,7 @@ StatService.prototype = {
     });
   },
 
-  mapHeaderData: function(keys, elements) {
+  mapObject: function(keys, elements) {
     if (keys.length != elements.length) {
       return new Error('Invalid argument');
     }
@@ -60,7 +60,7 @@ StatService.prototype = {
       li = item.split(' ');
       li = StatService.prototype.removeEmptyElements(li);
 
-      big_arr.push(StatService.prototype.mapHeaderData(header, li));
+      big_arr.push(StatService.prototype.mapObject(header, li));
     });
 
     return big_arr;
