@@ -1,4 +1,4 @@
-var exec = require('child_process').exec, child, rows, line, big_arr, li, header;
+var exec = require('child_process').execFile, child, rows, line, big_arr, li, header;
 
 function StatService() {};
 
@@ -67,9 +67,9 @@ StatService.prototype = {
   },
 
   doExec: function(command, cb) {
-    child = exec(command, function(error, stdout, stderr) {
+    child = exec(command['path'], command['args'], command['options'], function(error, stdout, stderr) {
         if (error) {
-          console.log("Command error!\n");
+          error.err = new Error('Invalid arguments.');
           cb(error);
         }
 
@@ -84,7 +84,11 @@ function newStatService() {
 
 module.exports.exec = function(cb) {
   var srv = newStatService();
-  srv.doExec('ps -ef', cb);
+  srv.doExec({
+    'path' : 'ps',
+    'args' : ['-ef'],
+    'options' : {}
+  }, cb);
 }
 
 module.exports.StatService = StatService;
