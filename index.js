@@ -51,6 +51,9 @@ StatService.prototype = {
   },
 
   parseOutput: function(textArr) {
+    if (textArr.length === 0) {
+      return new Error('Invalid argument');
+    }
     rows = textArr.toString();
     line = rows.split('\n');
 
@@ -58,7 +61,7 @@ StatService.prototype = {
     header = StatService.prototype.parseHeader(line);
 
     // Remove the last element if it's empty
-    if (!line[line.length]) {
+    if (line[line.length - 1] == "") {
       line.pop();
     }
 

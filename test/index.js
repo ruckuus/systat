@@ -62,7 +62,7 @@ describe('test mapObject()', function() {
 describe('test parseHeader()', function() {
   it('should return header array', function() {
     var expected = ['ID', 'COL1', 'COL2', 'COL3'];
-    var lines = "ID COL1 COL2 COL3\n0 a b c d\n1 d e f".split('\n');
+    var lines = "ID COL1 COL2 COL3\n0 a b c \n1 d e f".split('\n');
     var srv = new sysstat.StatService();
 
     expect(expected).to.eql(srv.parseHeader(lines));
@@ -83,5 +83,31 @@ describe('test parseHeader()', function() {
 
     expect(expected).to.eql(srv.parseHeader(lines));
   });
+});
 
-})
+describe('test parseOutput()', function() {
+  it('should return correctly formatted object', function() {
+    var lines = "ID COL1 COL2 COL3\n0 a b c \n1 d e f";
+    var expected = [{
+      'ID' : '0',
+      'COL1' : 'a',
+      'COL2' : 'b',
+      'COL3' : 'c'
+    },
+    {
+      'ID' : '1',
+      'COL1' : 'd',
+      'COL2' : 'e',
+      'COL3' : 'f'
+    }];
+
+    var srv = new sysstat.StatService();
+    expect(expected).to.eql(srv.parseOutput(lines));
+  });
+
+  it('should return error given empty argument', function() {
+    var expected = new Error('Invalid argument');
+    var srv = new sysstat.StatService();
+    expect(expected).to.eql(srv.parseOutput(""));
+  });
+});
