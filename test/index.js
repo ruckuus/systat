@@ -58,3 +58,30 @@ describe('test mapObject()', function() {
     expect(expected).to.eql(srv.mapObject([], "hello world"));
   });
 });
+
+describe('test parseHeader()', function() {
+  it('should return header array', function() {
+    var expected = ['ID', 'COL1', 'COL2', 'COL3'];
+    var lines = "ID COL1 COL2 COL3\n0 a b c d\n1 d e f".split('\n');
+    var srv = new sysstat.StatService();
+
+    expect(expected).to.eql(srv.parseHeader(lines));
+  });
+
+  it('should return error given empty array', function() {
+    var expected = new Error("Invalid argument");
+    var lines = [];
+    var srv = new sysstat.StatService();
+
+    expect(expected).to.eql(srv.parseHeader(lines));
+  });
+
+  it('should return error given non-array arguments', function() {
+    var expected = new Error("Invalid argument");
+    var lines = "This is not array";
+    var srv = new sysstat.StatService();
+
+    expect(expected).to.eql(srv.parseHeader(lines));
+  });
+
+})

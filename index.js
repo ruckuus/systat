@@ -35,6 +35,14 @@ StatService.prototype = {
   },
 
   parseHeader: function(lines) {
+    if (!lines || lines.length === 0) {
+      return new Error('Invalid arguments');
+    }
+
+    if (!Array.isArray(lines)) {
+      return new Error('Invalid arguments');
+    }
+
     header = lines.shift();
     header = header.split(' ');
     header = StatService.prototype.removeEmptyElements(header);
